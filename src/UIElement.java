@@ -32,6 +32,7 @@ public class UIElement {
     //getters
     public UIElement getParent() {return parent;}
     public ArrayList<UIElement> getChildren() {return children;}
+    public boolean hasActable(){return actMethod != null;}
 
     public void addParent(UIElement parent){
         this.parent = parent;
