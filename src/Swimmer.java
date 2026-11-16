@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public record Swimmer(
         LocalDate birthDay,
         String name,
-        boolean isCompetative, //may be better as an Enum
+        boolean isCompetitive, //may be better as an Enum
         boolean isActive, //may be better as an Enum
         ArrayList<Discipline> disciplines,
         double unpaidDues,
