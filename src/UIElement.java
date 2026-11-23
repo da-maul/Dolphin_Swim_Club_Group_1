@@ -7,7 +7,7 @@ public class UIElement {
     //"tree" to get the user to the desired function which is an "Actable" object
 
     private UIElement parent;
-    private ArrayList<UIElement> children;
+    private ArrayList<UIElement> children = new ArrayList<>();
 
     private final String displayText;
     private Actable actMethod;
