@@ -6,43 +6,83 @@ public class ConsoleUI {
     //TODO add UI element for returning to previous menu
     //TODO add UI element for option to exit program
     private UIElement pointer; // pointer is the UI Element currently being displayed
-
-    public ConsoleUI(UIElement root){
+    private Club club;
+    public ConsoleUI(Club club, UIElement root){
         this.root = root;
         this.pointer = root;
+        this.club = club;
+
+    }
+    private boolean running = true;
+
+    public void run() {
+        while (running) {
+            displayMenu();
+            parseChoice();
+        }
     }
 
-    public void run(){
-        // main loop, no code, method calls ONLY
-        displayMenu();
-        parseChoice();
-    }
-
-    void displayMenu(){
+    void displayMenu() {
         ArrayList<UIElement> elements = pointer.getChildren();
+
+        IO.println("\n=== " + pointer + " ===");
+
         int increment = 1;
-        for (UIElement element : elements){
-            IO.println(increment +"): " + element);
+
+        for (UIElement element : elements) {
+            IO.println(increment + ": " + element);
             increment++;
         }
+
+        if (pointer.getParent() != null) {
+            IO.println("0: Back");
+        } else {
+            IO.println("0: Exit");
+        }
+
         IO.println();
     }
 
-    void parseChoice(){
-        //TODO this method is kinda lazy and sloppy and needs a second look
+    void parseChoice() {
         ArrayList<UIElement> elements = pointer.getChildren();
-        boolean invalidChoice = true;
-        int userChoice = -1;
-        while (invalidChoice){
-            userChoice= Integer.parseInt(IO.readln());
-            if (userChoice > elements.size() || userChoice < 1){
-                IO.println("Invalid input, please input a valid number...");
+
+        while (true) {
+            IO.print("Choose an option: ");
+            String input = IO.readln();
+
+            int userChoice;
+
+            try {
+                userChoice = Integer.parseInt(input.trim());
+            } catch (NumberFormatException e) {
+                IO.println("Invalid input. Enter a number.");
+                continue;
             }
-            else invalidChoice = false;
+
+            if (userChoice == 0) {
+                if (pointer.getParent() == null) {
+                    running = false;
+                    IO.println("Exiting program...");
+                } else {
+                    pointer = pointer.getParent();
+                }
+                return;
+            }
+
+            if (userChoice < 1 || userChoice > elements.size()) {
+                IO.println("Invalid option. Try again.");
+                continue;
+            }
+
+            UIElement chosenElement = elements.get(userChoice - 1);
+
+            if (chosenElement.hasActable()) {
+                chosenElement.act(club);
+            } else {
+                pointer = chosenElement;
+            }
+
+            return;
         }
-        UIElement chosenElement = elements.get(userChoice-1);
-        //TODO may be worth a second look at how this bit works
-        if (chosenElement.hasActable()) chosenElement.act();
-        else pointer = chosenElement;
     }
 }

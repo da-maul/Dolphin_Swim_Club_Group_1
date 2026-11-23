@@ -57,11 +57,11 @@ public class UIElement {
         child.addParent(this);
     }
 
-    public void act(){
+    public void act(Club club){
         // calls the Actable class attached to tree endpoints
         // do not edit to prevent a crash here, edit consoleUI so that this method is
         // never called if actMethod is NULL
-        actMethod.act();
+        actMethod.act(club);
     }
 
     @Override
