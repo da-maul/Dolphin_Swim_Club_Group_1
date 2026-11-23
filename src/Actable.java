@@ -3,3 +3,4 @@ public interface Actable {
     //Actable classes are called via the UI element it belongs to.
     public default void act(Club club){};
 }
+

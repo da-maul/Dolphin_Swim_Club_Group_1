@@ -12,3 +12,4 @@ public record SwimResult(
         int placement,
         Duration time //TODO research this type more thoroughly
 ) {}
+//wa
