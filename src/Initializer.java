@@ -13,5 +13,7 @@ public class Initializer {
         UIElement coachElem = new UIElement("Coach", consoleRoot);
         //add coach children here
         UIElement memberElem = new UIElement("Member", consoleRoot);
+
+        console.run();
     }
 }

@@ -7,7 +7,7 @@ public class UIElement {
     //"tree" to get the user to the desired function which is an "Actable" object
 
     private UIElement parent;
-    private ArrayList<UIElement> children;
+    private ArrayList<UIElement> children = new ArrayList<>();
 
     private final String displayText;
     private Actable actMethod;
@@ -17,6 +17,7 @@ public class UIElement {
         // this constructor has a defined parent
         this.parent = parent;
         this.displayText = displayText;
+        parent.addChild(this);
     }
     public UIElement(String displayText, Actable actMethod){
         // this constructor does not have a defined parent (parent must be added later)
