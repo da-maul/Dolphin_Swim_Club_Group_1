@@ -50,6 +50,6 @@ public class Swimmer {
                 "\nBirth date: " + birthDate +
                 "\nMembership: " + (active ? "Active" : "Passive") +
                 "\nSwimmer type: " +
-                (!active ? "None" : competitive ? "Competitive" : "Recreational");
+                (!active ? "None" : competitive ? "Competitive" : "Casual");
     }
 }
