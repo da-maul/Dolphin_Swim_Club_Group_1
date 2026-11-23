@@ -1,3 +1,4 @@
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 //Swimmer holds all data regarding members of the swim club
@@ -7,13 +8,16 @@ import java.util.ArrayList;
 public record Swimmer(
         LocalDate birthDay,
         String name,
-        boolean isCompetitive, //may be better as an Enum
-        boolean isActive, //may be better as an Enum
+        boolean isCompetitive,
+        boolean isActive,
         ArrayList<Discipline> disciplines,
         double unpaidDues,
-        Coach coach
+        Coach coach,
+        int swimmerId
 ) {
-
+  public int getSwimmerId() {
+        return swimmerId;
+    }
     private String displayDisciplines(){
         //this may be dumb
         StringBuilder returnString;
@@ -40,9 +44,11 @@ public record Swimmer(
     public String toString() {
         //this is very dumb and hacked together
         AgeChecker agechecker = new AgeChecker();
-        return name + " born on: " + birthDay+", " +
+        return name + " born on: " + "swimmerId: " + swimmerId + ", "+ birthDay+", " +
                 (isCompetitive ? "competitive" : "recreational")+ " " +
-                (agechecker.checkAge(birthDay) ? "adult" : "juvenile") + " swimmer"+
+                (agechecker.checkAge(birthDay) ? "adult" : "juvenile") + " swimmer"+ ", "+
                 coach+displayDisciplines()+displayDues();
     }
+
+
 }
