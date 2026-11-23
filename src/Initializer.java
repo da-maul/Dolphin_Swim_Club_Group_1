@@ -13,15 +13,15 @@ public class Initializer {
         consoleRoot.addChild("Owner");
         consoleRoot.addChild("Treasurer");
         consoleRoot.addChild("Coach");
-        consoleRoot.addChild("Member");
+        consoleRoot.addChild("swimmer");
 
         // Get owner menu
         UIElement ownerElem = consoleRoot.getChildren().get(0);
 
         // Add member registration to Owner
         ownerElem.addChild(
-                "Register new member",
-                new MemberRegistration(club)
+                "Register new swimmer",
+                new SwimmerRegistration(club)
         );
 
         // Start console

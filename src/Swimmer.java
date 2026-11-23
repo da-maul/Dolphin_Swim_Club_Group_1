@@ -2,25 +2,25 @@
 
 import java.time.LocalDate;
 
-public class Member {
+public class Swimmer {
 
-    private final int memberId;
+    private final int swimmerId;
     private String name;
     private LocalDate birthDate;
     private boolean active;
     private boolean competitive;
 
-    public Member(int memberId, String name, LocalDate birthDate,
-                  boolean active, boolean competitive) {
-        this.memberId = memberId;
+    public Swimmer(int swimmerId, String name, LocalDate birthDate,
+                   boolean active, boolean competitive) {
+        this.swimmerId = swimmerId;
         this.name = name;
         this.birthDate = birthDate;
         this.active = active;
         this.competitive = competitive;
     }
 
-    public int getMemberId() {
-        return memberId;
+    public int getSwimmerId() {
+        return swimmerId;
     }
 
     public String getName() {
@@ -45,7 +45,7 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member ID: " + memberId +
+        return "Swimmer ID: " + swimmerId +
                 "\nName: " + name +
                 "\nBirth date: " + birthDate +
                 "\nMembership: " + (active ? "Active" : "Passive") +
