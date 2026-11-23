@@ -4,6 +4,7 @@ public class Initializer {
     //as possible
 
     public void initialize(){
+        Club clubDolphin = new Club();
         UIElement consoleRoot = new UIElement("Root");
         ConsoleUI console = new ConsoleUI(consoleRoot);
         UIElement ownerElem = new UIElement("Owner", consoleRoot);

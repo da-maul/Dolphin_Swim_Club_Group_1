@@ -3,12 +3,14 @@ import java.util.ArrayList;
 public class CoachShowSwimmers implements Actable{
 
 
-    public String showAllSwimmers(ArrayList<Swimmer> swimmerList){
-
+    public void showAllSwimmers(ArrayList<Swimmer> swimmerList){
+        for (Swimmer swimmer : swimmerList){
+            IO.println(swimmer);
+        }
     }
 
     @Override
-    public void act() {
-        Actable.super.act();
+    public void act(Club club) {
+        showAllSwimmers(club.getSwimmers());
     }
 }

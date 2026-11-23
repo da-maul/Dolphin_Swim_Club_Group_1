@@ -6,10 +6,12 @@ public class ConsoleUI {
     //TODO add UI element for returning to previous menu
     //TODO add UI element for option to exit program
     private UIElement pointer; // pointer is the UI Element currently being displayed
-
-    public ConsoleUI(UIElement root){
+    private Club club;
+    public ConsoleUI(Club club, UIElement root){
         this.root = root;
         this.pointer = root;
+        this.club = club;
+
     }
     private boolean running = true;
 
@@ -75,7 +77,7 @@ public class ConsoleUI {
             UIElement chosenElement = elements.get(userChoice - 1);
 
             if (chosenElement.hasActable()) {
-                chosenElement.act();
+                chosenElement.act(club);
             } else {
                 pointer = chosenElement;
             }
