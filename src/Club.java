@@ -1,41 +1,28 @@
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 
 public class Club {
 
-    private final ArrayList<Member> members;
-    private int nextMemberId;
+    private final ArrayList<Swimmer> swimmers;
+    private int nextSwimmerId;
 
     public Club() {
-        members = new ArrayList<>();
-        nextMemberId = 1001;
+        swimmers = new ArrayList<>();
+        nextSwimmerId = 1001;
     }
 
-    public Member addMember(String name, LocalDate birthDate,
-                            boolean active, boolean competitive) {
-
-        Member member = new Member(
-                nextMemberId,
-                name,
-                birthDate,
-                active,
-                competitive
-        );
-
-        members.add(member);
-        nextMemberId++;
-
-        return member;
+    public void registerSwimmer(Swimmer swimmer) {
+        swimmers.add(swimmer);
     }
 
-    public ArrayList<Member> getMembers() {
-        return new ArrayList<>(members);
+    public ArrayList<Swimmer> getSwimmers() {
+        return new ArrayList<>(swimmers);
     }
 
-    public Member findMemberById(int memberId) {
-        for (Member member : members) {
-            if (member.getMemberId() == memberId) {
-                return member;
+    public Swimmer findSwimmerById(int swimmerId) {
+        for (Swimmer swimmer : swimmers) {
+            if (swimmer.getSwimmerId() == swimmerId) {
+                return swimmer;
             }
         }
         return null;

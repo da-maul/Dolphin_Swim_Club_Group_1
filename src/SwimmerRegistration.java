@@ -1,39 +1,18 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class MemberRegistration implements Actable {
+public class SwimmerRegistration implements Actable {
 
     private final Club club;
+    private int nextSwimmerId = 1001;
 
-    public MemberRegistration(Club club) {
+    public SwimmerRegistration(Club club) {
         this.club = club;
     }
 
     @Override
     public void act() {
-        IO.println("=== Register new member ===");
-
-        String name = readName();
-        LocalDate birthDate = readBirthDate();
-        boolean active = readBoolean("Active member (yes/no): ");
-
-        boolean competitive = false;
-
-        if (active) {
-            competitive = readBoolean(
-                    "Competitive swimmer (yes/no): "
-            );
-        }
-
-        Member member = club.addMember(
-                name,
-                birthDate,
-                active,
-                competitive
-        );
-
-        IO.println("Member successfully registered!");
-        IO.println(member);
+        addSwimmer();
     }
 
     private String readName() {
@@ -51,7 +30,7 @@ public class MemberRegistration implements Actable {
 
     private LocalDate readBirthDate() {
         while (true) {
-            IO.print("Enter birth date (yyyy-MM-dd): ");
+            IO.print("Enter birth date (yyyy-mm-dd): ");
             String input = IO.readln();
 
             try {
@@ -65,7 +44,7 @@ public class MemberRegistration implements Actable {
                 return date;
 
             } catch (DateTimeParseException e) {
-                IO.println("Invalid date. Use yyyy-MM-dd.");
+                IO.println("Invalid date. Use yyyy-mm-dd.");
             }
         }
     }
@@ -85,5 +64,24 @@ public class MemberRegistration implements Actable {
 
             IO.println("Invalid input. Enter yes or no.");
         }
+    }
+    public void addSwimmer() {
+        String name = readName();
+        LocalDate birthDate = readBirthDate();
+        boolean active = readBoolean("Active (yes/no): ");
+        boolean competitive = active && readBoolean("Competitive (yes/no): ");
+
+        int swimmerId = generateSwimmerId();
+
+        Swimmer swimmer = new Swimmer(
+                swimmerId, name, birthDate, active, competitive
+        );
+
+        club.registerSwimmer(swimmer);
+
+        IO.println("Swimmer registered: " + swimmer);
+    }
+    private int generateSwimmerId() {
+        return nextSwimmerId++;
     }
 }
