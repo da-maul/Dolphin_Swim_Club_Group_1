@@ -1,55 +1,54 @@
 
-
 import java.time.LocalDate;
+import java.util.ArrayList;
+//Swimmer holds all data regarding members of the swim club
+//remember to NOT store derived statistics like age or membership fee
 
-public class Swimmer {
-
-    private final int swimmerId;
-    private String name;
-    private LocalDate birthDate;
-    private boolean active;
-    private boolean competitive;
-
-    public Swimmer(int swimmerId, String name, LocalDate birthDate,
-                   boolean active, boolean competitive) {
-        this.swimmerId = swimmerId;
-        this.name = name;
-        this.birthDate = birthDate;
-        this.active = active;
-        this.competitive = competitive;
-    }
-
-    public int getSwimmerId() {
+//In other classes, please refer to SWIMMERS as SWIMMERS and NOT MEMBERS
+public record Swimmer(
+        LocalDate birthDay,
+        String name,
+        boolean isCompetitive,
+        boolean isActive,
+        ArrayList<Discipline> disciplines,
+        double unpaidDues,
+        Coach coach,
+        int swimmerId
+) {
+  public int getSwimmerId() {
         return swimmerId;
     }
-
-    public String getName() {
-        return name;
+    private String displayDisciplines(){
+        //this may be dumb
+        StringBuilder returnString;
+        if (disciplines != null){
+            returnString = new StringBuilder(", disciplines: ");
+            for (Discipline discipline : disciplines){
+                returnString.append(discipline+", ");
+            }
+            return returnString.toString();
+        }
+        else return "";
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public boolean isCompetitive() {
-        return competitive;
-    }
-
-    public int getAge(LocalDate date) {
-        return java.time.Period.between(birthDate, date).getYears();
+    private String displayDues(){
+        if (unpaidDues > 0){
+            return """
+                    owes: $%.2f
+                    """.formatted(unpaidDues);
+        }
+        else return "";
     }
 
     @Override
     public String toString() {
-        return "Swimmer ID: " + swimmerId +
-                "\nName: " + name +
-                "\nBirth date: " + birthDate +
-                "\nMembership: " + (active ? "Active" : "Passive") +
-                "\nSwimmer type: " +
-                (!active ? "None" : competitive ? "Competitive" : "Casual");
+        //this is very dumb and hacked together
+        AgeChecker agechecker = new AgeChecker();
+        return name + " born on: " + "swimmerId: " + swimmerId + ", "+ birthDay+", " +
+                (isCompetitive ? "competitive" : "recreational")+ " " +
+                (agechecker.checkAge(birthDay) ? "adult" : "juvenile") + " swimmer"+ ", "+
+                coach+displayDisciplines()+displayDues();
     }
+
+
 }

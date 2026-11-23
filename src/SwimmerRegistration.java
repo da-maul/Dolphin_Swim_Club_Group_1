@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class SwimmerRegistration implements Actable {
 
@@ -28,7 +29,7 @@ public class SwimmerRegistration implements Actable {
         }
     }
 
-    private LocalDate readBirthDate() {
+    private LocalDate readBirthDay() {
         while (true) {
             IO.print("Enter birth date (yyyy-mm-dd): ");
             String input = IO.readln();
@@ -67,16 +68,22 @@ public class SwimmerRegistration implements Actable {
     }
     public void addSwimmer() {
         String name = readName();
-        LocalDate birthDate = readBirthDate();
+        LocalDate birthDay = readBirthDay();
         boolean active = readBoolean("Active (yes/no): ");
         boolean competitive = active && readBoolean("Competitive (yes/no): ");
 
         int swimmerId = generateSwimmerId();
 
         Swimmer swimmer = new Swimmer(
-                swimmerId, name, birthDate, active, competitive
+                birthDay,
+                name,
+                competitive,
+                active,
+                new ArrayList<>(),
+                0.0,
+                null,
+                swimmerId
         );
-
         club.registerSwimmer(swimmer);
 
         IO.println("Swimmer registered: " + swimmer);
