@@ -13,6 +13,7 @@ public class SwimmerRegistration implements Actable {
 
     @Override
     public void act() {
+        //TODO this needs to take in a Club as a parameter, SwimmerRegistration can't just have Club as a variable.
         addSwimmer();
     }
 

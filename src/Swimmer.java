@@ -43,11 +43,7 @@ public record Swimmer(
     @Override
     public String toString() {
         //this is very dumb and hacked together
-        AgeChecker agechecker = new AgeChecker();
-        return name + " born on: " + "swimmerId: " + swimmerId + ", "+ birthDay+", " +
-                (isCompetitive ? "competitive" : "recreational")+ " " +
-                (agechecker.checkAge(birthDay) ? "adult" : "juvenile") + " swimmer"+ ", "+
-                coach+displayDisciplines()+displayDues();
+        return swimmerId +": "+ name ;
     }
 
 
