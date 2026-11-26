@@ -2,54 +2,62 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.StringJoiner;
 public class SwimmersCsvMapper {
-    public String toCsv(Swimmer swimmer){
+    private String disciplinesToCsv(Swimmer swimmer) {
         StringJoiner joiner = new StringJoiner(";");
-        for (Discipline discipline : swimmer.disciplines()) {
-            joiner.add(discipline.name());
-        }
-        String coach = swimmer.coach() == null ? "" : swimmer.coach().name();
 
-        return swimmer.swimmerId() + "," +
-                swimmer.name() + "," +
-                swimmer.birthDay() + ","+
-                swimmer.isCompetitive() + "," +
-                swimmer.isActive() + "," +
-                joiner + "," +
-                swimmer.unpaidDues()+ "," +
-                coach;
+        if (swimmer.disciplines != null) {
+            for (Discipline discipline : swimmer.disciplines) {
+                joiner.add(discipline.name());
+            }
+        }
+
+        return joiner.toString();
+    }
+    private String coachToCsv(Swimmer swimmer) {
+        if (swimmer.coach == null) {
+            return "";
+        }
+
+        return swimmer.coach.name();
+    }
+    public String toCsv(Swimmer swimmer) {
+        return swimmer.getSwimmerId() + "," +
+                swimmer.name + "," +
+                swimmer.birthDay + "," +
+                swimmer.isCompetitive + "," +
+                swimmer.isActive + "," +
+                disciplinesToCsv(swimmer) + "," +
+                swimmer.unpaidDues + "," +
+                coachToCsv(swimmer);
     }
 
 
-    public Swimmer fromCsv(String line){
-        ArrayList<Discipline> disciplines = new ArrayList<>();
+    public Swimmer fromCsv(String line) {
         String[] parts = line.split(",", -1);
+
         int swimmerId = Integer.parseInt(parts[0]);
         String name = parts[1];
         LocalDate birthDay = LocalDate.parse(parts[2]);
         boolean isCompetitive = Boolean.parseBoolean(parts[3]);
         boolean isActive = Boolean.parseBoolean(parts[4]);
-        String[] disciplineNames = parts[5].split(";");
         double unpaidDues = Double.parseDouble(parts[6]);
-        Coach coach = parts[7].isEmpty() ? null : new Coach(parts[7]);
 
+        Swimmer swimmer = new Swimmer(swimmerId, name, birthDay);
+
+        swimmer.setCompetitive(isCompetitive);
+        swimmer.setActive(isActive);
+        swimmer.unpaidDues = unpaidDues;
+
+        swimmer.disciplines = new ArrayList<>();
 
         if (!parts[5].isEmpty()) {
-            for (String disciplineName : disciplineNames) {
-                disciplines.add(Discipline.valueOf(disciplineName));
+            for (String discipline : parts[5].split(";")) {
+                swimmer.disciplines.add(Discipline.valueOf(discipline));
             }
         }
-        return new Swimmer(
-                birthDay,
-                name,
-                isCompetitive,
-                isActive,
-                disciplines,
-                unpaidDues,
-                coach,
-                swimmerId);
 
+        return swimmer;
     }
-
 
 
 

@@ -19,7 +19,9 @@ public class Club {
     public void registerSwimmer(Swimmer swimmer) {
         swimmers.add(swimmer);
     }
-
+    public void loadSwimmers(ArrayList<Swimmer> swimmers) {
+        this.swimmers = new ArrayList<>(swimmers);
+    }
     //getters
     public ArrayList<Swimmer> getSwimmers() { return new ArrayList<>(swimmers);}
     public ArrayList<Coach> getCoaches() {return coaches;}

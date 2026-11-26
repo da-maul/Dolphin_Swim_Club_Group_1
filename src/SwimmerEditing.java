@@ -3,6 +3,11 @@ import java.time.format.DateTimeParseException;
 //Handless user input for editing an existing member
 public class SwimmerEditing implements Actable {
 
+    private final SwimmerCsvFileHandler fileHandler;
+
+    public SwimmerEditing(SwimmerCsvFileHandler fileHandler) {
+        this.fileHandler = fileHandler;
+    }
     @Override
     public void act (Club club){
         IO.print("Enter member ID: ");
@@ -93,6 +98,11 @@ public class SwimmerEditing implements Actable {
             IO.println("Invalid option.");
             return;
         }
+
+        IO.println("Member details updated:");
+        IO.println(swimmer);
+
+        fileHandler.saveSwimmers(club.getSwimmers());
 
         IO.println("Member details updated:");
         IO.println(swimmer);
