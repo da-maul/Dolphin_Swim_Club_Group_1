@@ -22,6 +22,9 @@ public class Club {
     public void addCoach(Coach coach){
         coaches.add(coach);
     }
+    public void deleteCoach(Coach coach){
+        coaches.remove(coach);
+    }
 
     public void loadSwimmers(ArrayList<Swimmer> swimmers) {
         this.swimmers = new ArrayList<>(swimmers);

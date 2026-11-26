@@ -7,10 +7,12 @@ public class OwnerViewSwimmerInfoByID implements Actable{
         displaySwimmerInfoByID(club);
     }
 
+
     private void displaySwimmerInfoByID(Club club) {
         ArrayList<Swimmer> swimmersList = club.getSwimmers();
         int searchID = readID();
 
+        //TODO make this function display if they are a Jr. or Sr. swimmer
         for (Swimmer swimmer : swimmersList) {
             if (swimmer.getSwimmerId() == searchID) {
                 IO.println(
