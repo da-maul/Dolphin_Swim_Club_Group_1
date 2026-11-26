@@ -15,12 +15,12 @@ public class Swimmer {
     Coach coach;
     int swimmerId;
 
-    //constructor for noncompetative swimmer
+    //constructor for noncompetitive swimmer
     public Swimmer(int swimmerId, String name, LocalDate birthDay){
         this.swimmerId = swimmerId; this.name = name; this.birthDay = birthDay;
         isActive = true; isCompetitive = false;
     }
-    //constructor for competative swimmer
+    //constructor for competitive swimmer
     public Swimmer(int swimmerId, String name, LocalDate birthDay, Coach coach){
         this.swimmerId = swimmerId; this.name = name; this.birthDay = birthDay;
         this.coach = coach;
