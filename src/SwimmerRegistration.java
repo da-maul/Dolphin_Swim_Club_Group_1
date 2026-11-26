@@ -11,7 +11,6 @@ public class SwimmerRegistration implements Actable {
         this.club = club;
         this.fileHandler = fileHandler;
     }
-
     @Override
     public void act(Club club) {
         addSwimmer();
@@ -78,16 +77,14 @@ public class SwimmerRegistration implements Actable {
 
         int swimmerId = generateSwimmerId();
 
-        Swimmer swimmer = new Swimmer(
-                swimmerId,
-                name,
-                birthDay,
-                active,
-                competitive
-        );
+        Swimmer swimmer = new Swimmer(swimmerId, name, birthDay);
+
+        swimmer.setActive(active);
+        swimmer.setCompetitive(competitive);
 
         club.registerSwimmer(swimmer);
         fileHandler.saveSwimmers(club.getSwimmers());
+
         IO.println("Swimmer registered: " + swimmer);
     }
 
@@ -95,8 +92,8 @@ public class SwimmerRegistration implements Actable {
         int maxId = 1000;
 
         for (Swimmer swimmer : club.getSwimmers()) {
-            if (swimmer.swimmerId() > maxId) {
-                maxId = swimmer.swimmerId();
+            if (swimmer.getSwimmerId() > maxId) {
+                maxId = swimmer.getSwimmerId();
             }
         }
 
