@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 public class SwimmerRegistration implements Actable {
 
@@ -12,8 +11,7 @@ public class SwimmerRegistration implements Actable {
     }
 
     @Override
-    public void act() {
-        //TODO this needs to take in a Club as a parameter, SwimmerRegistration can't just have Club as a variable.
+    public void act(Club club) {
         addSwimmer();
     }
 
@@ -33,7 +31,7 @@ public class SwimmerRegistration implements Actable {
     private LocalDate readBirthDay() {
         while (true) {
             IO.print("Enter birth date (yyyy-mm-dd): ");
-            String input = IO.readln();
+            String input = IO.readln().trim();
 
             try {
                 LocalDate date = LocalDate.parse(input);
@@ -67,30 +65,32 @@ public class SwimmerRegistration implements Actable {
             IO.println("Invalid input. Enter yes or no.");
         }
     }
+
     public void addSwimmer() {
         String name = readName();
         LocalDate birthDay = readBirthDay();
+
         boolean active = readBoolean("Active (yes/no): ");
-        boolean competitive = active && readBoolean("Competitive (yes/no): ");
+        boolean competitive =
+                active && readBoolean("Competitive (yes/no): ");
 
         int swimmerId = generateSwimmerId();
 
         Swimmer swimmer = new Swimmer(
-                birthDay,
+                swimmerId,
                 name,
-                competitive,
+                birthDay,
                 active,
-                new ArrayList<>(),
-                0.0,
-                null,
-                swimmerId
+                competitive
         );
+
         club.registerSwimmer(swimmer);
 
         IO.println("Swimmer registered: " + swimmer);
     }
+
     private int generateSwimmerId() {
         return nextSwimmerId++;
     }
 }
-//wa
+

@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>Swimmer.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #cf8e6d;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Swimmer.java</font>
+</center></td></tr></table>
+<pre>
+
+<span class="s1">import </span><span class="s0">java</span><span class="s2">.</span><span class="s0">time</span><span class="s2">.</span><span class="s0">LocalDate</span><span class="s2">;</span>
+
+<span class="s1">public class </span><span class="s0">Swimmer </span><span class="s2">{</span>
+
+    <span class="s1">private final int </span><span class="s0">swimmerId</span><span class="s2">;</span>
+    <span class="s1">private </span><span class="s0">String name</span><span class="s2">;</span>
+    <span class="s1">private </span><span class="s0">LocalDate birthDate</span><span class="s2">;</span>
+    <span class="s1">private boolean </span><span class="s0">active</span><span class="s2">;</span>
+    <span class="s1">private boolean </span><span class="s0">competitive</span><span class="s2">;</span>
+
+    <span class="s1">public </span><span class="s0">Swimmer</span><span class="s2">(</span><span class="s1">int </span><span class="s0">swimmerId</span><span class="s2">, </span><span class="s0">String name</span><span class="s2">, </span><span class="s0">LocalDate birthDate</span><span class="s2">,</span>
+                   <span class="s1">boolean </span><span class="s0">active</span><span class="s2">, </span><span class="s1">boolean </span><span class="s0">competitive</span><span class="s2">) {</span>
+        <span class="s1">this</span><span class="s2">.</span><span class="s0">swimmerId </span><span class="s2">= </span><span class="s0">swimmerId</span><span class="s2">;</span>
+        <span class="s1">this</span><span class="s2">.</span><span class="s0">name </span><span class="s2">= </span><span class="s0">name</span><span class="s2">;</span>
+        <span class="s1">this</span><span class="s2">.</span><span class="s0">birthDate </span><span class="s2">= </span><span class="s0">birthDate</span><span class="s2">;</span>
+        <span class="s1">this</span><span class="s2">.</span><span class="s0">active </span><span class="s2">= </span><span class="s0">active</span><span class="s2">;</span>
+        <span class="s1">this</span><span class="s2">.</span><span class="s0">competitive </span><span class="s2">= </span><span class="s0">competitive</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public int </span><span class="s0">getSwimmerId</span><span class="s2">() {</span>
+        <span class="s1">return </span><span class="s0">swimmerId</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public </span><span class="s0">String getName</span><span class="s2">() {</span>
+        <span class="s1">return </span><span class="s0">name</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public </span><span class="s0">LocalDate getBirthDate</span><span class="s2">() {</span>
+        <span class="s1">return </span><span class="s0">birthDate</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public boolean </span><span class="s0">isActive</span><span class="s2">() {</span>
+        <span class="s1">return </span><span class="s0">active</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public boolean </span><span class="s0">isCompetitive</span><span class="s2">() {</span>
+        <span class="s1">return </span><span class="s0">competitive</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">public int </span><span class="s0">getAge</span><span class="s2">(</span><span class="s0">LocalDate date</span><span class="s2">) {</span>
+        <span class="s1">return </span><span class="s0">java</span><span class="s2">.</span><span class="s0">time</span><span class="s2">.</span><span class="s0">Period</span><span class="s2">.</span><span class="s0">between</span><span class="s2">(</span><span class="s0">birthDate</span><span class="s2">, </span><span class="s0">date</span><span class="s2">).</span><span class="s0">getYears</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">@Override</span>
+    <span class="s1">public </span><span class="s0">String toString</span><span class="s2">() {</span>
+        <span class="s1">return </span><span class="s3">&quot;Swimmer ID: &quot; </span><span class="s2">+ </span><span class="s0">swimmerId </span><span class="s2">+</span>
+                <span class="s3">&quot;</span><span class="s1">\n</span><span class="s3">Name: &quot; </span><span class="s2">+ </span><span class="s0">name </span><span class="s2">+</span>
+                <span class="s3">&quot;</span><span class="s1">\n</span><span class="s3">Birth date: &quot; </span><span class="s2">+ </span><span class="s0">birthDate </span><span class="s2">+</span>
+                <span class="s3">&quot;</span><span class="s1">\n</span><span class="s3">Membership: &quot; </span><span class="s2">+ (</span><span class="s0">active </span><span class="s2">? </span><span class="s3">&quot;Active&quot; </span><span class="s2">: </span><span class="s3">&quot;Passive&quot;</span><span class="s2">) +</span>
+                <span class="s3">&quot;</span><span class="s1">\n</span><span class="s3">Swimmer type: &quot; </span><span class="s2">+</span>
+                <span class="s2">(!</span><span class="s0">active </span><span class="s2">? </span><span class="s3">&quot;None&quot; </span><span class="s2">: </span><span class="s0">competitive </span><span class="s2">? </span><span class="s3">&quot;Competitive&quot; </span><span class="s2">: </span><span class="s3">&quot;Casual&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+</pre>
+</body>
+</html>

@@ -1,4 +1,3 @@
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 //Swimmer holds all data regarding members of the swim club
@@ -39,13 +38,27 @@ public record Swimmer(
         }
         else return "";
     }
+//Allows the details to be changed without changing the swimmer ID
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setCompetitive(boolean competitive) {
+        this.competitive = competitive;
+    }
 
     @Override
     public String toString() {
         //this is very dumb and hacked together
         return swimmerId +": "+ name ;
     }
-
-
 }
 //wa
