@@ -4,16 +4,29 @@ import java.util.ArrayList;
 //remember to NOT store derived statistics like age or membership fee
 
 //In other classes, please refer to SWIMMERS as SWIMMERS and NOT MEMBERS
-public record Swimmer(
-        LocalDate birthDay,
-        String name,
-        boolean isCompetitive,
-        boolean isActive,
-        ArrayList<Discipline> disciplines,
-        double unpaidDues,
-        Coach coach,
-        int swimmerId
-) {
+public class Swimmer {
+
+    LocalDate birthDay;
+    String name;
+    boolean isCompetitive;
+    boolean isActive;
+    ArrayList<Discipline> disciplines;
+    double unpaidDues;
+    Coach coach;
+    int swimmerId;
+
+    //constructor for noncompetative swimmer
+    public Swimmer(int swimmerId, String name, LocalDate birthDay){
+        this.swimmerId = swimmerId; this.name = name; this.birthDay = birthDay;
+        isActive = true; isCompetitive = false;
+    }
+    //constructor for competative swimmer
+    public Swimmer(int swimmerId, String name, LocalDate birthDay, Coach coach){
+        this.swimmerId = swimmerId; this.name = name; this.birthDay = birthDay;
+        this.coach = coach;
+        isActive = true; isCompetitive = true;
+    }
+
   public int getSwimmerId() {
         return swimmerId;
     }
@@ -39,20 +52,22 @@ public record Swimmer(
         else return "";
     }
 //Allows the details to be changed without changing the swimmer ID
+    //TODO add method to be able to add/remove disciplines to the swimmer
+
     public void setName(String name) {
         this.name = name;
     }
 
     public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+        this.birthDay = birthDate;
     }
 
     public void setActive(boolean active) {
-        this.active = active;
+        this.isActive = active;
     }
 
     public void setCompetitive(boolean competitive) {
-        this.competitive = competitive;
+        this.isCompetitive = competitive;
     }
 
     @Override
