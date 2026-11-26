@@ -7,12 +7,14 @@ public class ConsoleUI {
     //TODO add UI element for option to exit program
     private UIElement pointer; // pointer is the UI Element currently being displayed
     private Club club;
-    public ConsoleUI(Club club, UIElement root){
+
+    public ConsoleUI(Club club, UIElement root) {
         this.root = root;
         this.pointer = root;
         this.club = club;
 
     }
+
     private boolean running = true;
 
     public void run() {
@@ -81,7 +83,6 @@ public class ConsoleUI {
             } else {
                 pointer = chosenElement;
             }
-
             return;
         }
     }

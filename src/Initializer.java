@@ -6,9 +6,12 @@ public class Initializer {
     public void initialize(){
         Club clubDolphin = new Club();
         UIElement consoleRoot = new UIElement("Root");
-        ConsoleUI console = new ConsoleUI(consoleRoot);
+        ConsoleUI console = new ConsoleUI(clubDolphin, consoleRoot);
         UIElement ownerElem = new UIElement("Owner", consoleRoot);
-        //add owner children here
+        //connects the owner menu to its actions
+        ownerElem.addChild("Register member", new SwimmerRegistration(clubDolphin));
+        ownerElem.addChild("Show members", new CoachShowSwimmers());
+        ownerElem.addChild("Edit member details", new SwimmerEditing());
         UIElement treasurerElem = new UIElement("Treasurer", consoleRoot);
         //add treasurer children here
         UIElement coachElem = new UIElement("Coach", consoleRoot);

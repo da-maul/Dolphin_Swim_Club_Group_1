@@ -1,5 +1,3 @@
-
-
 import java.time.LocalDate;
 
 public class Swimmer {
@@ -41,6 +39,22 @@ public class Swimmer {
 
     public int getAge(LocalDate date) {
         return java.time.Period.between(birthDate, date).getYears();
+    }
+//Allows the details to be changed without changing the swimmer ID
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setCompetitive(boolean competitive) {
+        this.competitive = competitive;
     }
 
     @Override
