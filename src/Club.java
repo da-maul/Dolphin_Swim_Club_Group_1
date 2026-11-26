@@ -19,6 +19,9 @@ public class Club {
     public void registerSwimmer(Swimmer swimmer) {
         swimmers.add(swimmer);
     }
+    public void addCoach(Coach coach){
+        coaches.add(coach);
+    }
 
     //getters
     public ArrayList<Swimmer> getSwimmers() { return new ArrayList<>(swimmers);}
