@@ -1,0 +1,5 @@
+swimmerId,name,birthDay,isCompetitive,isActive,disciplines,unpaidDues,coach
+1001,August,2003-02-20,true,true,,0.0,
+1002,Lone,1965-09-13,false,false,,0.0,
+1003,kurt,2016-08-09,true,true,,0.0,
+1004,Poul,1980-12-12,false,true,,0.0,

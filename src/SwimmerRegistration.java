@@ -4,10 +4,12 @@ import java.time.format.DateTimeParseException;
 public class SwimmerRegistration implements Actable {
 
     private final Club club;
-    private int nextSwimmerId = 1001;
+    private final SwimmerCsvFileHandler fileHandler;
 
-    public SwimmerRegistration(Club club) {
+
+    public SwimmerRegistration(Club club, SwimmerCsvFileHandler fileHandler) {
         this.club = club;
+        this.fileHandler = fileHandler;
     }
 
     @Override
@@ -85,12 +87,20 @@ public class SwimmerRegistration implements Actable {
         );
 
         club.registerSwimmer(swimmer);
-
+        fileHandler.saveSwimmers(club.getSwimmers());
         IO.println("Swimmer registered: " + swimmer);
     }
 
     private int generateSwimmerId() {
-        return nextSwimmerId++;
+        int maxId = 1000;
+
+        for (Swimmer swimmer : club.getSwimmers()) {
+            if (swimmer.swimmerId() > maxId) {
+                maxId = swimmer.swimmerId();
+            }
+        }
+
+        return maxId + 1;
     }
 }
 
