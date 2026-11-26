@@ -8,7 +8,7 @@ public class SwimmerEditing implements Actable {
         IO.print("Enter member ID: ");
         int swimmerId;
 //Convert the input to a swimmerID. Invalid if the input is wrong
-        try {2
+        try {
             swimmerId = Integer.parseInt(IO.readln().trim());
         } catch (NumberFormatException e) {
             IO.println("Please enter a whole number.");
@@ -98,3 +98,4 @@ public class SwimmerEditing implements Actable {
         IO.println(swimmer);
     }
 }
+//wario
