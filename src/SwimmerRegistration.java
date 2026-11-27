@@ -1,18 +1,18 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 public class SwimmerRegistration implements Actable {
 
     private final Club club;
-    private int nextSwimmerId = 1001;
+    private final SwimmerCsvFileHandler fileHandler;
 
-    public SwimmerRegistration(Club club) {
+
+    public SwimmerRegistration(Club club, SwimmerCsvFileHandler fileHandler) {
         this.club = club;
+        this.fileHandler = fileHandler;
     }
-
     @Override
-    public void act() {
+    public void act(Club club) {
         addSwimmer();
     }
 
@@ -32,7 +32,7 @@ public class SwimmerRegistration implements Actable {
     private LocalDate readBirthDay() {
         while (true) {
             IO.print("Enter birth date (yyyy-mm-dd): ");
-            String input = IO.readln();
+            String input = IO.readln().trim();
 
             try {
                 LocalDate date = LocalDate.parse(input);
@@ -66,29 +66,38 @@ public class SwimmerRegistration implements Actable {
             IO.println("Invalid input. Enter yes or no.");
         }
     }
+
     public void addSwimmer() {
         String name = readName();
         LocalDate birthDay = readBirthDay();
+
         boolean active = readBoolean("Active (yes/no): ");
-        boolean competitive = active && readBoolean("Competitive (yes/no): ");
+        boolean competitive =
+                active && readBoolean("Competitive (yes/no): ");
 
         int swimmerId = generateSwimmerId();
 
-        Swimmer swimmer = new Swimmer(
-                birthDay,
-                name,
-                competitive,
-                active,
-                new ArrayList<>(),
-                0.0,
-                null,
-                swimmerId
-        );
+        Swimmer swimmer = new Swimmer(swimmerId, name, birthDay);
+
+        swimmer.setActive(active);
+        swimmer.setCompetitive(competitive);
+
         club.registerSwimmer(swimmer);
+        fileHandler.saveSwimmers(club.getSwimmers());
 
         IO.println("Swimmer registered: " + swimmer);
     }
+
     private int generateSwimmerId() {
-        return nextSwimmerId++;
+        int maxId = 1000;
+
+        for (Swimmer swimmer : club.getSwimmers()) {
+            if (swimmer.getSwimmerId() > maxId) {
+                maxId = swimmer.getSwimmerId();
+            }
+        }
+
+        return maxId + 1;
     }
 }
+//Wario &
