@@ -4,4 +4,4 @@ public enum Discipline {
     BREASTSTROKE, //brystsvømning
     BACKSTROKE //rygcrawl
 }
-//wario
+//wario &

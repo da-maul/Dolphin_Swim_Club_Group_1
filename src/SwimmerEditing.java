@@ -108,4 +108,4 @@ public class SwimmerEditing implements Actable {
         IO.println(swimmer);
     }
 }
-//wario
+//Wario &

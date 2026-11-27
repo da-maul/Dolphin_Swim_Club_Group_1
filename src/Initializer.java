@@ -26,4 +26,4 @@ public class Initializer {
         console.run();
     }
 }
-//wario
+//wario &
